@@ -1,0 +1,200 @@
+#Imports
+import random
+#Functions/Procedures
+def Goodbye_Banner():
+    print("***********************")
+    print("***Sad to see you go***")
+    print("***********************")
+# Set Constants to a value
+age_min = 5
+age_max = 11
+age_med = 7
+# Lists of questions and answers
+# The most important, it is because the 5 questions of the New Zealand 
+# Trivia quiz is the main purpose of the game. 
+quiz_a_qstns = ["""
+1. What is the capital of New Zealand?
+
+a = Auckland       b = Wellington
+
+c = Christchurch   d = Hamilton
+""",
+               """
+2. Which city is known as 'The Garden City?'
+
+a = Wellington     b = Christchuch
+
+c = Paeroa         d = Auckland
+""",
+               """
+3. Where did L&P soda originally come from?
+
+a = Putaruru       b = Waihi
+
+c = Paeroa         d = Auckland
+""",
+               """
+4. In what month is Matariki celebrated?
+
+a = April          b = May
+
+c = June           d = July
+""",
+               """
+5. What colour is Kakariki?
+
+a = Green          b = Blue
+
+c = Black          d = Grey
+"""]
+a_ans = ["B", "B", "C", "C", "A"]
+quiz_b_qstns = ["""
+1. What is the name of the stretch of water
+that separates the North and South Islands?
+
+a = Wellington Strait      b = Tasman Channel
+
+c = Cook Strait            d = Kaikoura Strait
+""",
+               """
+2. Which New Zealand city houses the Beehive?
+a = Wellington b = Christchurch
+c = Paeroa d = Auckland
+""",
+               """
+3. Which town has a giant carrot as a landmark?
+
+a = Taihape      b = Waihi
+
+c = Paeroa       d = Ohakune
+""",
+               """
+4. Where is 90 mile beach?
+
+a = Top of the North Island      b = Bottom of the South Island
+c = Bottom of the North Island   d = Top of the South Island
+""",
+               """
+5. When was the Treaty of Waitangi signed?
+
+a = 1815     b = 1840
+
+c = 1855     d = 1875
+"""]
+b_ans = ["C", "A", "D", "A", "B"]
+possible_ans = ["A", "B", "C", "D"]
+#Variables
+name = ""
+age = 0
+run = "Y"
+set_question = ""
+c_resume = ""
+user_ans = ""
+total = 0
+# This line of code is used to ask the user for their name.
+# So that it will be used throughout the program.
+name = input("What is your name?")
+print(f"What is up {name}!")
+
+while run == "Y":
+    score = 0
+# The code below is used to greet the user and give them the rules for the
+# quiz so that the user will know how the quiz works and for them to see
+# if they know New Zealand more (just for fun).
+    print("""Welcome to New Zealand Trivia Quiz, you will be given a set
+of 5 questions about New Zealand, try to see if you can get all
+5 correct""")
+# Code below will determine the a/b questions in regards of the user's age.
+    while True:
+        try:
+            age = int(input("Please type your age here: "))
+# The code below is used to inform the user their collective answers.
+# So that they will know if their answer is correct or incorrect.
+            if age >= age_min and age <= age_med:
+                set_question = "A"
+                break
+            elif age <= age_max and age > age_med:
+                set_question = "B"
+                break
+            elif age < age_min or age > age_max:
+                set_question = "C"
+                break
+        except ValueError:
+            print("Please enter a number.")
+            
+    if set_question == "C":
+        print("""You are not within the age group, but you can choose to
+continue or leave""")
+# Lets players who are outside of the age group choose if they want to
+# Continue or not.
+        while True:
+            c_resume = input("""Do you want to go ahead and continue?
+Y/N: """)
+            if c_resume == "Y":
+                while True:
+                    set_question = input("""Choose a set of questions that you
+would like to give a try A/B: """)
+                    if set_question != "A" and set_question != "B":
+                        print("Please *only* choose between set A and B: ")
+                    else:
+                        break
+                break
+# Code below lets out of age range to leave.
+# So that they have an option to choose from.
+            elif c_resume == "N":
+                print("Farewell")
+                run = "N"
+                break
+            else:
+                print ("Please insert Y/N.")
+
+    if set_question == "A":
+        for i in range(5):
+            while True:
+                user_ans = input(quiz_a_qstns[i])
+                if user_ans in possible_ans:                
+                    break
+                else:
+                    print("That is an invalid input,"
+                    " Please enter only a uppercase A, B, C or D")
+
+            if user_ans == a_ans[i]:
+                print("Jolly good show! Well done!")
+                total += 1
+                break
+            else:
+                print("Good try! But you are wrong.")
+                print(f"The correct answer is {a_ans[i]}")
+                break
+            print(f"Your final score is {total}/5")
+
+    if set_question == "B":
+        for i in range(5):
+            while True:
+                user_ans = input(quiz_b_qstns[i])
+                if user_ans in possible_ans:
+                    break
+                else:
+                    print("That is an invalid input,"
+                    " Please enter only a uppercase A, B, C or D ")
+            if user_ans == b_ans[i]:
+                print("Well done! I have doubted you.")
+                total += 1
+                break
+            else:
+                print("Whoops! Your answer is incorrect")
+                print(f"The correct answer is {b_ans[i]}")
+                break
+            print(f"Your final score is {score}/5")
+# The code below will give the user an option if they want to play again.
+# If the user selects "Yes" (Y) , the code continues, if the user selects
+# "No" (N), the code will end, sending the user a Goodbye banner.
+        while run == "Y":
+            run = input("Do you want to play again? Y/N: ")
+            if run == "Y" or run == "N":
+                break
+            else:
+                print("Please enter Y/N: ")
+                
+Goodbye_Banner()
+
